@@ -6,6 +6,9 @@ function setMode(mode: "development" | "production") {
   // Si está en modo de produción:
   if (mode === "production") {
     TOKEN = process.env.TOKEN;
+    CLIENT_ID = process.env.CLIENT_ID ? process.env.CLIENT_ID : "***" ;
+    GUILD_ID = process.env.GUILD_ID ? process.env.GUILD_ID : "***"
+
   }
   // Si está en modo de desarrollo:
   if (mode === "development") {
