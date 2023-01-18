@@ -20,16 +20,26 @@ client.on(Events.InteractionCreate, async (interaction) => {
   //console.log(interaction.isModalSubmit());
 
   if (!interaction.isModalSubmit()) return;
-  if (interaction.customId === "myModal") {
-    await interaction.reply({
-      content: "Your submission was received successfully!",
-    });
 
-    const favoriteColor =
-      interaction.fields.getTextInputValue("favoriteColorInput");
-    const hobbies = interaction.fields.getTextInputValue("hobbiesInput");
-    console.log({ favoriteColor, hobbies });
+  try {
+    if (interaction.customId === "addFilmModal") {
+      const saga = interaction.fields.getTextInputValue("saga");
+      const name = interaction.fields.getTextInputValue("name");
+      const description = interaction.fields.getTextInputValue("description");
+      const imageUrl = interaction.fields.getTextInputValue("imageUrl");
+      const stars = interaction.fields.getTextInputValue("stars");
+      console.log({ saga, name, description, imageUrl, stars });
+      await interaction.reply({
+        content: "Your submission was received successfully!",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    await interaction.reply({
+      content: "Something went Wrong",
+    });
   }
+
   // console.log(interaction);
 });
 

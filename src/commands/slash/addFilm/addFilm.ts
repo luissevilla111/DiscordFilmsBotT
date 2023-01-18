@@ -36,35 +36,72 @@ export default new SlashBuilder({
   async run(client, int) {
     try {
       const modal = new ModalBuilder()
-        .setCustomId("myModal")
-        .setTitle("My Modal");
+        .setCustomId("addFilmModal")
+        .setTitle("Add Film");
 
-      const favoriteColorInput = new TextInputBuilder()
-        .setCustomId("favoriteColorInput")
+      const sagaInput = new TextInputBuilder()
+        .setCustomId("saga")
         // The label is the prompt the user sees for this input
-        .setLabel("What's your favorite color?")
+        .setLabel("Saga")
         // Short means only a single line of text
         .setStyle(TextInputStyle.Short);
 
-      const hobbiesInput = new TextInputBuilder()
-        .setCustomId("hobbiesInput")
-        .setLabel("What's some of your favorite hobbies?")
+      const nameInput = new TextInputBuilder()
+        .setCustomId("name")
+        .setLabel("Name")
+        // Paragraph means multiple lines of text.
+        .setStyle(TextInputStyle.Short);
+
+      const descriptionInput = new TextInputBuilder()
+        .setCustomId("description")
+        .setLabel("Description")
         // Paragraph means multiple lines of text.
         .setStyle(TextInputStyle.Paragraph);
 
+      const imageUrlInput = new TextInputBuilder()
+        .setCustomId("imageUrl")
+        .setLabel("Image URL")
+        // Paragraph means multiple lines of text.
+        .setStyle(TextInputStyle.Short);
+
+      const starsInput = new TextInputBuilder()
+        .setCustomId("stars")
+        .setLabel("Stars")
+        // Paragraph means multiple lines of text.
+        .setStyle(TextInputStyle.Short);
+
       // An action row only holds one text input,
       // so you need one action row per text input.
-      const firstActionRow =
+      const sagaActionRow =
         new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
-          favoriteColorInput
+          sagaInput
         );
-      const secondActionRow =
+      const nameActionRow =
         new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
-          hobbiesInput
+          nameInput
+        );
+
+      const descriptionActionRow =
+        new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
+          descriptionInput
+        );
+      const imageUrlActionRow =
+        new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
+          imageUrlInput
+        );
+      const starsActionRow =
+        new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
+          starsInput
         );
 
       // Add inputs to the modal
-      modal.addComponents(firstActionRow, secondActionRow);
+      modal.addComponents(
+        sagaActionRow,
+        nameActionRow,
+        descriptionActionRow,
+        imageUrlActionRow,
+        starsActionRow
+      );
 
       // Show the modal to the user
       await int.showModal(modal);
