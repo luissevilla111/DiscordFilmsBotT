@@ -58,7 +58,8 @@ const getFilms = async (params: null | ILastKey) => {
 
     listFilmsString += blockCodeCharacte;
     if (lastKey) {
-      infoMessage = "**If You want to get more Films please use this command**\n";
+      infoMessage =
+        "**If You want to get more Films please use next command**\n";
       messageToGetMoreFilms += `/getfilms sagakey:${lastKey.Saga} namekey:${lastKey.Name}`;
     }
 
@@ -98,7 +99,17 @@ export default new SlashBuilder({
           Date.now() - int.createdTimestamp
         }ms`,
       });*/
-      const response = await getFilms(null);
+      const Saga = int.options.get("sagakey")?.value?.toString();
+      const Name = int.options.get("namekey")?.value?.toString();
+
+      console.log(Saga);
+      let params: null | ILastKey = null;
+
+      if (Saga && Name) {
+        params = { Name, Saga };
+      }
+
+      const response = await getFilms(params);
 
       console.log(response);
       await int.reply({ content: "The Films are the next!" });
