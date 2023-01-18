@@ -59,7 +59,7 @@ const getFilms = async (params: null | ILastKey) => {
     listFilmsString += blockCodeCharacte;
     if (lastKey) {
       infoMessage = "If You want to get more Films please use this command\n";
-      messageToGetMoreFilms += `**hi**`;
+      messageToGetMoreFilms += `**/getFilms sagakey ${lastKey.Saga} namekey ${lastKey.Name}**`;
     }
 
     replyMessages.push(listFilmsString);
@@ -77,7 +77,19 @@ const getFilms = async (params: null | ILastKey) => {
 export default new SlashBuilder({
   data: new SlashCommandBuilder()
     .setName("getfilms")
-    .setDescription("get the films list"),
+    .setDescription("get the films list")
+    .addStringOption((option) =>
+      option
+        .setName("sagakey")
+        .setDescription("Saga of the Film")
+        .setRequired(false)
+    )
+    .addStringOption((option) =>
+      option
+        .setName("namekey")
+        .setDescription("Name of the Film")
+        .setRequired(false)
+    ),
   async run(client, int) {
     try {
       /*await int.reply({ content: "Pong!" });
@@ -89,7 +101,7 @@ export default new SlashBuilder({
       const response = await getFilms(null);
 
       console.log(response);
-      await int.reply({ content: "Films!" });
+      await int.reply({ content: "The Films are the next!" });
 
       for (let index = 0; index < response.length; index++) {
         const msg = response[index];
