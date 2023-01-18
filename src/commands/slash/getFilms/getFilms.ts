@@ -58,8 +58,8 @@ const getFilms = async (params: null | ILastKey) => {
 
     listFilmsString += blockCodeCharacte;
     if (lastKey) {
-      infoMessage = "If You want to get more Films please use this command\n";
-      messageToGetMoreFilms += `**/getFilms sagakey ${lastKey.Saga} namekey ${lastKey.Name}**`;
+      infoMessage = "**If You want to get more Films please use this command**\n";
+      messageToGetMoreFilms += `/getfilms sagakey:${lastKey.Saga} namekey:${lastKey.Name}`;
     }
 
     replyMessages.push(listFilmsString);
