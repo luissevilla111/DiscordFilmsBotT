@@ -30,6 +30,12 @@ client.on(Events.InteractionCreate, async (interaction) => {
       const description = interaction.fields.getTextInputValue("description");
       const imageUrl = interaction.fields.getTextInputValue("imageUrl");
       const stars = +interaction.fields.getTextInputValue("stars").toString();
+      if (isNaN(stars)) {
+        await interaction.reply({
+          content: `El Numero de stars que ingresaste no es correcto`,
+        });
+        return;
+      }
       //console.log({ saga, name, description, imageUrl, stars });
       const filmObj: FilmRequest = {
         saga,
