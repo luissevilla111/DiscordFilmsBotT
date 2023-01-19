@@ -43,7 +43,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
       await addFilm(filmObj);
       await interaction.reply({
-        content: "Your submission was received successfully!",
+        content: `The film **${name}** has beed addded to the list`,
       });
     }
   } catch (err) {
