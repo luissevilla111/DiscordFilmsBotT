@@ -8,6 +8,16 @@ export interface Film {
   Image_Url: string;
   Stars: number;
 }
+export interface FilmRequest {
+  saga: string;
+  name: string;
+  added_Time_Utc?: string;
+  description: string;
+  durationMinutes: string;
+  genders: string[];
+  imageUrl: string;
+  stars: number;
+}
 
 export interface ILastKey {
   Saga: String;

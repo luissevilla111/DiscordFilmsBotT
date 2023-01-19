@@ -9,6 +9,8 @@ const client = new Client({
 });
 import config from "./config/config";
 import handler from "./handler/main";
+import { addFilm } from "./helpers/api";
+import { Film, FilmRequest } from "./interfaces/interfaces";
 
 // Collections
 const commands = new Collection();
@@ -27,8 +29,19 @@ client.on(Events.InteractionCreate, async (interaction) => {
       const name = interaction.fields.getTextInputValue("name");
       const description = interaction.fields.getTextInputValue("description");
       const imageUrl = interaction.fields.getTextInputValue("imageUrl");
-      const stars = interaction.fields.getTextInputValue("stars");
-      console.log({ saga, name, description, imageUrl, stars });
+      const stars = +interaction.fields.getTextInputValue("stars").toString();
+      //console.log({ saga, name, description, imageUrl, stars });
+      const filmObj: FilmRequest = {
+        saga,
+        name,
+        description,
+        imageUrl,
+        stars,
+        durationMinutes: "0",
+        genders: [],
+      };
+
+      await addFilm(filmObj);
       await interaction.reply({
         content: "Your submission was received successfully!",
       });
